@@ -1,0 +1,46 @@
+<button class="btn-primary my-2 mx-2" (click)="gohome()">Back</button>
+
+<h2 class="text-center my-4">Race Results of {{ year }}</h2>
+
+<ng-container
+  [ngTemplateOutlet]="
+    seasonResult && seasonResult?.length !== 0
+      ? raceResultTemplate
+      : noDataTemplate
+  "
+  [ngTemplateOutletContext]="{ seasonResult: seasonResult }"
+>
+</ng-container>
+
+<ng-template #raceResultTemplate>
+  <table class="table table-striped text-center my-2">
+    <thead>
+      <tr>
+        <th>Round</th>
+        <th>Circuit Name</th>
+        <th>Location</th>
+        <th>Winner</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of seasonResult">
+        <td>{{ result?.round }}</td>
+        <td>{{ result?.raceName }}</td>
+        <td>{{ result?.circuitLocation }}</td>
+        <td>{{ result?.driver }}</td>
+        <td>{{ result?.date }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
+
+<ng-template #noDataTemplate>
+  <div class="d-flex justify-content-center">
+    <div
+      class="spinner-grow"
+      style="width: 3rem; height: 3rem"
+      role="status"
+    ></div>
+  </div>
+</ng-template>
