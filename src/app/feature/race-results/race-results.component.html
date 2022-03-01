@@ -13,22 +13,28 @@
 </ng-container>
 
 <ng-template #raceResultTemplate>
-  <table class="table table-striped text-center my-2">
+  <table class="table text-center my-2">
     <thead>
       <tr>
         <th>Round</th>
         <th>Circuit Name</th>
-        <th>Location</th>
         <th>Winner</th>
+        <th>Location</th>
         <th>Date</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let result of seasonResult">
+      <tr
+        *ngFor="let result of seasonResult"
+        [ngStyle]="{
+          'background-color':
+            result?.championShipIndicator === 'Y' ? 'bisque' : 'none'
+        }"
+      >
         <td>{{ result?.round }}</td>
         <td>{{ result?.raceName }}</td>
-        <td>{{ result?.circuitLocation }}</td>
         <td>{{ result?.driver }}</td>
+        <td>{{ result?.circuitLocation }}</td>
         <td>{{ result?.date }}</td>
       </tr>
     </tbody>

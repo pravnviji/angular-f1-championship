@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { MotorRacingService, TRaceResult } from '..';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-race-results',
@@ -22,8 +23,14 @@ export class RaceResultsComponent implements OnInit {
   ngOnInit(): void {
     this.year = this.activatedRoute.snapshot.paramMap.get('year') as string;
     console.log(this.year);
+
     this.motorRacingService
-      .getSeasonResult(this.year)
+      .getDriverStanding(this.year)
+      .pipe(
+        switchMap((res) => {
+          return this.motorRacingService.getSeasonResult(this.year, res);
+        })
+      )
       .subscribe((res) => (this.seasonResult = res));
   }
 

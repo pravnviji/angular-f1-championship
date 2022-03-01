@@ -9,21 +9,53 @@ import { environment } from 'src/environments/environment';
 export class MotorRacingService {
   constructor(private http: HttpClient) {}
 
-  getSeasonResult(season: string) {
+  getSeasonResult(season: string, driverStanding: TDriverStanding) {
     return this.http
       .get(`${environment.baseUrl}${season}${environment.seasonResult}`)
       .pipe(
         pluck('MRData', 'RaceTable', 'Races'),
-        map((result) => this.transformSeasonResult(result as any)),
+        map((result) =>
+          this.transformSeasonResult(
+            result as any,
+            driverStanding as TDriverStanding
+          )
+        ),
         catchError((err) => this.handleError(err))
       );
   }
 
-  transformSeasonResult(result: any) {
+  getDriverStanding(season: string) {
+    return this.http
+      .get(`${environment.baseUrl}${season}${environment.championshipResult}`)
+      .pipe(
+        pluck('MRData', 'StandingsTable', 'StandingsLists'),
+        map((result) => this.transformDriverStanding(result as any)),
+        catchError((err) => this.handleError(err))
+      );
+  }
+
+  transformDriverStanding(result: any) {
+    console.log('***** transformDriverStanding *******');
+    let driverStanding!: TDriverStanding;
+    console.log(result[0].DriverStandings[0].Driver);
+    driverStanding = {
+      driverId: result[0].DriverStandings[0].Driver.driverId,
+      driver:
+        result[0].DriverStandings[0].Driver.givenName +
+        ' ' +
+        result[0].DriverStandings[0].Driver.familyName,
+    };
+    console.log('finalResult');
+    console.log(driverStanding);
+    return driverStanding;
+  }
+
+  transformSeasonResult(result: any, driverInfo: TDriverStanding) {
     console.log('***** transformSeasonResult *******');
-    let finalResult: TRaceResult[] = [];
+    console.log(driverInfo);
+    let seasonResult: TRaceResult[] = [];
     result.forEach((items: any) => {
-      finalResult.push({
+      seasonResult.push({
         round: items.round,
         driver:
           items.Results[0].Driver.givenName +
@@ -35,11 +67,14 @@ export class MotorRacingService {
           items.Circuit.Location.locality +
           ', ' +
           items.Circuit.Location.country,
+        driverId: items.Results[0].Driver.driverId,
+        championShipIndicator:
+          items.Results[0].Driver.driverId === driverInfo.driverId ? 'Y' : 'N',
       });
     });
     console.log('finalResult');
-    console.log(finalResult);
-    return finalResult;
+    console.log(seasonResult);
+    return seasonResult;
   }
 
   handleError(error: any) {
@@ -53,6 +88,13 @@ export type TRaceResult = {
   round: string;
   raceName: string;
   driver: string;
+  driverId: string;
   date: string;
   circuitLocation: string;
+  championShipIndicator: string;
+};
+
+export type TDriverStanding = {
+  driver: string;
+  driverId: string;
 };

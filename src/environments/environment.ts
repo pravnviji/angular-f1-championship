@@ -6,8 +6,7 @@ export const environment = {
   production: false,
   baseUrl: 'https://ergast.com/api/f1/',
   seasonResult: '/results/1.json',
-  championshipResult:
-    'driverStandings/1.json?callback=JSON_CALLBACK&limit=50&offset=55',
+  championshipResult: '/driverStandings/1.json',
 };
 
 /*
