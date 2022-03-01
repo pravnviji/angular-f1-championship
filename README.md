@@ -8,9 +8,9 @@ Run ng serve for a dev server. Navigate to http://localhost:4200/. The app will 
 
 ## Task Details
 
-F1 World Champions starting from 2005 until now
-List of the winners for every race for the selected year
-Highlight the row when the winner has been the world champion in the same season
+- F1 World Champions starting from 2005 until now
+- List of the winners for every race for the selected year
+- Highlight the row when the winner has been the world champion in the same season
 
 
 ## Screenshot
