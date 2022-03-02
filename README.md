@@ -8,9 +8,9 @@ I ❤️ loved this assignment and try to match with F1 theme.<br> I hope you wi
 ## Installation Instruction 📝
 
 - Enter following command in terminal ---> git clone https://github.com/pravnviji/angular-f1-championship.git
-- Run --> npm install 
-- Start server --> ng serve --> Application will start run in https://localhost:4200
-- Check Test coverage --> npm run test
+- Run --> `npm install` 
+- Start server --> `ng serve` --> Application will start run in https://localhost:4200
+- Check Test coverage --> `npm run test`
 
 ## Task Details 🗒
 
