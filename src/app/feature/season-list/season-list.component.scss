@@ -1,0 +1,12 @@
+@import "../../../styles.scss";
+
+.app-season-list {
+  &__img {
+    height: 16vh;
+    width: 27vw;
+  }
+  &__title {
+    color: $base-red-cl;
+    text-align: center;
+  }
+}

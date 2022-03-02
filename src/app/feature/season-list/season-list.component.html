@@ -1,11 +1,18 @@
-<h2 class="text-center">F1 Season List</h2>
-<div class="container my-3">
-  <div class="row p-4">
+<div class="d-flex justify-content-center align-items-center">
+  <img
+    class="app-season-list__img my-3"
+    src="../../../assets/f1-new.svg"
+  /><br />
+</div>
+
+<h2 class="text-center app-season-list__title">Season's</h2>
+<div class="container my-3 d-flex">
+  <div class="row p-4 offset-md-1">
     <div
-      class="col-md-2 text-center"
-      [ngStyle]="getRandomColor()"
+      class="col-md-2 col-auto text-center"
       (click)="gotoResultPage(year)"
-      *ngFor="let year of season"
+      *ngFor="let year of season; index as i"
+      [ngStyle]="getRandomColor(i)"
     >
       {{ year }}
     </div>

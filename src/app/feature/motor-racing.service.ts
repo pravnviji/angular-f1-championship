@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, pluck, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TDriverStanding, TRaceResult } from '.';
 
 @Injectable({
   providedIn: 'root',
@@ -37,13 +38,13 @@ export class MotorRacingService {
   transformDriverStanding(result: any) {
     console.log('***** transformDriverStanding *******');
     let driverStanding!: TDriverStanding;
-    console.log(result[0].DriverStandings[0].Driver);
+    console.log(result[0]?.DriverStandings[0]?.Driver);
     driverStanding = {
-      driverId: result[0].DriverStandings[0].Driver.driverId,
+      driverId: result[0]?.DriverStandings[0]?.Driver?.driverId,
       driver:
-        result[0].DriverStandings[0].Driver.givenName +
+        result[0]?.DriverStandings[0]?.Driver?.givenName +
         ' ' +
-        result[0].DriverStandings[0].Driver.familyName,
+        result[0]?.DriverStandings[0]?.Driver?.familyName,
     };
     console.log('finalResult');
     console.log(driverStanding);
@@ -58,18 +59,20 @@ export class MotorRacingService {
       seasonResult.push({
         round: items.round,
         driver:
-          items.Results[0].Driver.givenName +
+          items?.Results[0]?.Driver?.givenName +
           ' ' +
-          items.Results[0].Driver.familyName,
-        raceName: items.raceName,
-        date: items.date,
+          items?.Results[0]?.Driver?.familyName,
+        raceName: items?.raceName,
+        date: items?.date,
         circuitLocation:
-          items.Circuit.Location.locality +
+          items?.Circuit?.Location?.locality +
           ', ' +
           items.Circuit.Location.country,
-        driverId: items.Results[0].Driver.driverId,
+        driverId: items?.Results[0]?.Driver?.driverId,
         championShipIndicator:
-          items.Results[0].Driver.driverId === driverInfo.driverId ? 'Y' : 'N',
+          items?.Results[0]?.Driver?.driverId === driverInfo.driverId
+            ? 'Y'
+            : 'N',
       });
     });
     console.log('finalResult');
@@ -83,18 +86,3 @@ export class MotorRacingService {
     return throwError(() => error);
   }
 }
-
-export type TRaceResult = {
-  round: string;
-  raceName: string;
-  driver: string;
-  driverId: string;
-  date: string;
-  circuitLocation: string;
-  championShipIndicator: string;
-};
-
-export type TDriverStanding = {
-  driver: string;
-  driverId: string;
-};
