@@ -2,9 +2,11 @@
 
 This project was generated with Angular CLI version 13.2.2.
 
-## Development server
+## Installation instruction
 
-Run ng serve for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+- Enter below command in terminal ---> git clone https://github.com/pravnviji/angular-f1-championship.git
+- Run --> npm install 
+- Start server --> ng serve --> Application run in https://localhost:4200
 
 ## Task Details
 
