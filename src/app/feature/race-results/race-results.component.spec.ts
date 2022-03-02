@@ -36,6 +36,7 @@ describe('RaceResultsComponent', () => {
   let fixture: ComponentFixture<RaceResultsComponent>;
   let location: Location;
   let activateRoute: ActivatedRoute;
+  let motorRacingService: MotorRacingService;
   const locationStub = {
     back: jasmine.createSpy('back'),
   };
@@ -63,6 +64,7 @@ describe('RaceResultsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RaceResultsComponent);
     location = fixture.debugElement.injector.get(Location);
+    motorRacingService = fixture.debugElement.injector.get(MotorRacingService);
     activateRoute = fixture.debugElement.injector.get(ActivatedRoute);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -87,6 +89,33 @@ describe('RaceResultsComponent', () => {
 
     expect(activateRoute.snapshot.paramMap.get('year')).toEqual('2015');
     expect(component.year).toEqual('2015');
+  });
+
+  it('getRaceResult() should call and  be return result', () => {
+    const mockRaceResult = [
+      {
+        round: '1',
+        raceName: 'raceTestName',
+        driver: 'testDrver',
+        driverId: 'sdfsd',
+        date: '2015-23-1',
+        circuitLocation: 'Australia',
+        championShipIndicator: 'Y',
+      },
+    ];
+    component.getRaceResult();
+
+    expect(component.seasonResult).toEqual(mockRaceResult);
+  });
+
+  it('getRaceResult() should call and return null if data is empty', () => {
+    spyOn(motorRacingService, 'getDriverStanding').and.returnValue(
+      of({} as any)
+    );
+
+    component.getRaceResult();
+
+    expect(component.seasonResult).toEqual([]);
   });
 
   it('gohome() call previous page', () => {
