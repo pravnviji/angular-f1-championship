@@ -139,7 +139,6 @@ describe('MotorRacingService', () => {
         req.method === 'GET' &&
         req.url === baseUrl + season + championshipResult
     );
-
     reqMock.flush(errorData);
   });
 
