@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Location } from '@angular/common';
 
-import { MotorRacingService, TRaceResult } from '..';
-import { switchMap } from 'rxjs';
+import { MotorRacingService, TDriverStanding, TRaceResult } from '..';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-race-results',
@@ -27,8 +27,10 @@ export class RaceResultsComponent implements OnInit {
     this.motorRacingService
       .getDriverStanding(this.year)
       .pipe(
-        switchMap((res) => {
-          return this.motorRacingService.getSeasonResult(this.year, res);
+        switchMap((res: TDriverStanding) => {
+          return res?.driverId
+            ? this.motorRacingService.getSeasonResult(this.year, res)
+            : of([]);
         })
       )
       .subscribe((res) => (this.seasonResult = res));

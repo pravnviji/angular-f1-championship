@@ -180,17 +180,32 @@ describe('MotorRacingService', () => {
     reqMock.flush(dummySeasonResult);
   });
 
-  it('getSeasonResult() should return null if empty respone from server ', () => {
+  it('transformSeasonResult() should return null if empty response from server ', () => {
     const responData = {};
-    const res: TDriverStanding = {
-      driver: '',
-      driverId: '',
+    const driverStandingRes: TDriverStanding = {
+      driver: 'test',
+      driverId: 'test',
     };
 
-    const req = serviceTest.transformDriverStanding(responData);
-    expect(req).toEqual(res);
+    const expectRes: TRaceResult[] = [
+      {
+        round: '',
+        raceName: '',
+        driver: '',
+        driverId: '',
+        date: '',
+        circuitLocation: '',
+        championShipIndicator: '',
+      },
+    ];
+
+    const req = serviceTest.transformSeasonResult(
+      responData,
+      driverStandingRes
+    );
+    expect(req).toEqual([]);
   });
-  it('getSeasonResult() should call handleError()', () => {
+  it('getDriverStanding() should call handleError()', () => {
     const season = '2013';
     spyOn(serviceTest as any, 'handleError').and.callThrough();
     const errorData: HttpErrorResponse = new HttpErrorResponse({
@@ -209,6 +224,34 @@ describe('MotorRacingService', () => {
       (req) =>
         req.method === 'GET' &&
         req.url === baseUrl + season + championshipResult
+    );
+
+    reqMock.flush(errorData);
+  });
+
+  it('getSeasonResult() should handle error inside ', () => {
+    const driverStandinglocal: TDriverStanding = {
+      driver: 'test',
+      driverId: 'test',
+    };
+    spyOn(serviceTest as any, 'handleError').and.callThrough();
+    const season = '2013';
+    const errorData: HttpErrorResponse = new HttpErrorResponse({
+      error: {},
+      status: 500,
+      url: baseUrl + season + seasonResult,
+      statusText: 'Bad Request',
+    });
+
+    serviceTest.getSeasonResult(season, driverStandinglocal).subscribe(
+      () => fail('should error'),
+      () => {
+        expect(serviceTest.handleError).toHaveBeenCalled();
+      }
+    );
+    const reqMock = httpMock.expectOne(
+      (req) =>
+        req.method === 'GET' && req.url === baseUrl + season + seasonResult
     );
 
     reqMock.flush(errorData);

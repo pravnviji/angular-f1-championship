@@ -55,28 +55,34 @@ export class MotorRacingService {
     console.log('***** transformSeasonResult *******');
     console.log(driverInfo);
     let seasonResult: TRaceResult[] = [];
-    result.forEach((items: any) => {
-      seasonResult.push({
-        round: items?.round ?? '',
-        driver: items?.Results[0]
-          ? items?.Results[0]?.Driver?.givenName +
-            ' ' +
-            items?.Results[0]?.Driver?.familyName
-          : '',
-        raceName: items?.raceName ?? '',
-        date: items?.date ?? '',
-        circuitLocation: items?.Circuit
-          ? items?.Circuit?.Location?.locality +
-            ', ' +
-            items.Circuit.Location.country
-          : '',
-        driverId: items?.Results[0]?.Driver?.driverId ?? '',
-        championShipIndicator:
-          items?.Results[0]?.Driver?.driverId === driverInfo.driverId
-            ? 'Y'
-            : 'N',
+    console.log('Check result');
+    console.log(result);
+    if (result.length > 0) {
+      result.forEach((items: any) => {
+        seasonResult.push({
+          round: items?.round ?? '',
+          driver: items?.Results[0]
+            ? items?.Results[0]?.Driver?.givenName +
+              ' ' +
+              items?.Results[0]?.Driver?.familyName
+            : '',
+          raceName: items?.raceName ?? '',
+          date: items?.date ?? '',
+          circuitLocation: items?.Circuit
+            ? items?.Circuit?.Location?.locality +
+              ', ' +
+              items.Circuit.Location.country
+            : '',
+          driverId: items?.Results[0]?.Driver?.driverId ?? '',
+          championShipIndicator:
+            items?.Results[0]?.Driver?.driverId === driverInfo.driverId
+              ? 'Y'
+              : 'N',
+        });
       });
-    });
+    } else {
+      seasonResult = [];
+    }
     console.log('finalResult');
     console.log(seasonResult);
     return seasonResult;
