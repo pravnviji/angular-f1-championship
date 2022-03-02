@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './season-list.component.html',
   styleUrls: ['./season-list.component.scss'],
 })
-export class SeasonListComponent implements OnInit {
+export class SeasonListComponent {
   public season: string[] = [
     '2005',
     '2006',
@@ -29,12 +29,9 @@ export class SeasonListComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
-
   getRandomColor(countIndex: number) {
     console.log(this.season.length);
     return {
-      //background: '#' + Math.floor(Math.random() * 16777215).toString(16) + '',
       background: countIndex % 2 === 0 ? '#000000' : '#e10700',
       padding: '5vw',
       margin: '0.1vw',

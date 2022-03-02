@@ -2,6 +2,8 @@
 
 :host .app-race-results {
   background-color: $base-black-cl;
+  width: 100vw;
+  height: 150vh;
   &__back-btn {
     color: $base-white-cl;
     background-color: $base-red-cl;
@@ -33,5 +35,14 @@
     color: $base-white-cl;
     background-color: $base-red-cl;
     margin-bottom: 1vh;
+  }
+  &__spinner {
+    width: 5vw;
+    height: 10vh;
+    margin-top: 20%;
+    color: white;
+    &--text {
+      color: white;
+    }
   }
 }
