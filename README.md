@@ -16,6 +16,6 @@ This project was generated with Angular CLI version 13.2.2.
 
 
 ## Screenshot
-<img width="900" alt="Screenshot 2022-03-02 at 10 29 08 AM" src="https://user-images.githubusercontent.com/2680132/156284759-762d1144-d7d3-4934-a7cd-7082a2f72dbd.png">
+<img width="900" alt="Screenshot 2022-03-02 at 2 41 41 PM" src="https://user-images.githubusercontent.com/2680132/156309189-dd5ba1a7-56c2-4257-bea8-d1c80478cd60.png">
 <br><br>
-<img width="900" alt="Screenshot 2022-03-02 at 10 41 40 AM" src="https://user-images.githubusercontent.com/2680132/156284775-6a42b867-4668-4f28-b578-e883e108f0a8.png">
+<img width="900" alt="Screenshot 2022-03-02 at 2 39 00 PM" src="https://user-images.githubusercontent.com/2680132/156309196-b2e62d45-ac69-4635-a55a-c4e61fd26c02.png">
