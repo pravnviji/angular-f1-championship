@@ -17,7 +17,7 @@ I ❤️ loved this assignment and try to match with F1 theme.<br> I hope you wi
 - F1 World Champions starting from 2005 until now
 - List of the winners for every race for the selected year
 - Highlight the row when the winner has been the world champion in the same season
-- With Test Coverage about 80% 📊
+- With Test Coverage about 80% and above 📊
 
 ## Tech Used 👨‍💻
 
