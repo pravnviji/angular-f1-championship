@@ -15,12 +15,11 @@ describe('SeasonListComponent', () => {
       imports: [FeatureModule, RouterTestingModule.withRoutes([])],
       declarations: [SeasonListComponent],
     }).compileComponents();
-    fixture = TestBed.createComponent(SeasonListComponent);
-    router = TestBed.get(Router);
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SeasonListComponent);
+    router = TestBed.get(Router);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -21,9 +21,14 @@ export class RaceResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getParamMap();
+    this.getRaceResult();
+  }
+  getParamMap(): void {
     this.year = this.activatedRoute.snapshot.paramMap.get('year') as string;
-    console.log(this.year);
+  }
 
+  getRaceResult(): void {
     this.motorRacingService
       .getDriverStanding(this.year)
       .pipe(
