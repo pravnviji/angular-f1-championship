@@ -14,6 +14,6 @@ Run ng serve for a dev server. Navigate to http://localhost:4200/. The app will 
 
 
 ## Screenshot
-<img width="800" alt="Screenshot 2022-03-01 at 5 52 56 PM" src="https://user-images.githubusercontent.com/2680132/156146778-d8521260-d1f8-4906-9067-b7a2f3143281.png">
+<img width="900" alt="Screenshot 2022-03-02 at 10 29 08 AM" src="https://user-images.githubusercontent.com/2680132/156284759-762d1144-d7d3-4934-a7cd-7082a2f72dbd.png">
 <br><br>
-<img width="800" alt="Screenshot 2022-03-01 at 5 47 05 PM" src="https://user-images.githubusercontent.com/2680132/156146177-68296067-582a-4015-b5a7-5fb4bdd0818b.png">
+<img width="900" alt="Screenshot 2022-03-02 at 10 41 40 AM" src="https://user-images.githubusercontent.com/2680132/156284775-6a42b867-4668-4f28-b578-e883e108f0a8.png">
