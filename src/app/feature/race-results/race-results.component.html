@@ -1,56 +1,62 @@
-<div class="d-flex justify-content-end my-2 mx-2">
-  <h2 class="app-race-results__hdr">Race Results of {{ year }}</h2>
+<div class="app-race-results">
+  <div class="d-flex justify-content-end">
+    <h2 class="app-race-results__hdr mt-4">Race Results of {{ year }}</h2>
 
-  <button class="app-race-results__back-btn" (click)="gohome()">Back</button>
-</div>
-
-<ng-container
-  [ngTemplateOutlet]="
-    seasonResult && seasonResult?.length !== 0
-      ? raceResultTemplate
-      : noDataTemplate
-  "
-  [ngTemplateOutletContext]="{ seasonResult: seasonResult }"
->
-</ng-container>
-
-<ng-template #raceResultTemplate>
-  <div class="app-race-results__result-cont container border border-dark">
-    <table class="app-race-results__tbl table text-center my-2">
-      <thead>
-        <tr>
-          <th>Round</th>
-          <th>Circuit Name</th>
-          <th>Winner</th>
-          <th>Location</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let result of seasonResult"
-          [ngStyle]="{
-            'background-color':
-              result?.championShipIndicator === 'Y' ? 'red' : 'none'
-          }"
-        >
-          <td>{{ result?.round }}</td>
-          <td>{{ result?.raceName }}</td>
-          <td>{{ result?.driver }}</td>
-          <td>{{ result?.circuitLocation }}</td>
-          <td>{{ result?.date }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <button class="app-race-results__back-btn mt-4" (click)="gohome()">
+      Back
+    </button>
   </div>
-</ng-template>
 
-<ng-template #noDataTemplate>
-  <div class="d-flex justify-content-center">
+  <ng-container
+    [ngTemplateOutlet]="
+      seasonResult && seasonResult?.length !== 0
+        ? raceResultTemplate
+        : noDataTemplate
+    "
+    [ngTemplateOutletContext]="{ seasonResult: seasonResult }"
+  >
+  </ng-container>
+
+  <ng-template #raceResultTemplate>
     <div
-      class="spinner-grow"
-      style="width: 3rem; height: 3rem"
-      role="status"
-    ></div>
-  </div>
-</ng-template>
+      class="app-race-results__result-cont container border border-dark mt-3"
+    >
+      <table class="app-race-results__tbl table text-center my-2">
+        <thead>
+          <tr>
+            <th>Round</th>
+            <th>Circuit Name</th>
+            <th>Winner</th>
+            <th>Location</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let result of seasonResult"
+            [ngStyle]="{
+              'background-color':
+                result?.championShipIndicator === 'Y' ? 'red' : 'none'
+            }"
+          >
+            <td>{{ result?.round }}</td>
+            <td>{{ result?.raceName }}</td>
+            <td>{{ result?.driver }}</td>
+            <td>{{ result?.circuitLocation }}</td>
+            <td>{{ result?.date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+
+  <ng-template #noDataTemplate>
+    <div class="d-flex justify-content-center">
+      <div
+        class="spinner-grow"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      ></div>
+    </div>
+  </ng-template>
+</div>

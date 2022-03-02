@@ -1,19 +1,22 @@
 @import "../../../styles.scss";
 
 :host .app-race-results {
+  background-color: $base-black-cl;
   &__back-btn {
     color: $base-white-cl;
     background-color: $base-red-cl;
+
+    border: 1px solid $base-white-cl !important;
     text-align: right;
     width: 9vw;
     height: 5vh;
     margin-top: 2vh;
-    margin-right: 3vw;
+    margin-right: 4vw;
     border-radius: 99% 1% 0% 100% / 54% 93% 7% 46%;
   }
   &__result-cont {
     color: $base-white-cl;
-    border: 5px solid $base-black-cl;
+    border: 2px solid $base-white-cl !important;
     border-radius: 0.5rem;
     background-color: $base-black-cl;
   }
@@ -21,7 +24,7 @@
     color: $base-white-cl;
   }
   &__hdr {
-    border: 1px solid $base-black-cl;
+    border: 1px solid $base-white-cl !important;
     padding: 1vw;
     text-align: center;
     width: 50vw;

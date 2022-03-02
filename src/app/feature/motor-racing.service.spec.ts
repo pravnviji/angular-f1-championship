@@ -142,13 +142,36 @@ describe('MotorRacingService', () => {
     reqMock.flush(errorData);
   });
 
+  it('transformDriverStanding() should return transform Data and result should be equal ', () => {
+    const reslocal: TDriverStanding = {
+      driver: 'Lewis Hamilton',
+      driverId: 'hamilton',
+    };
+
+    const req = serviceTest.transformDriverStanding(
+      dummyDriverStanding['MRData']['StandingsTable']['StandingsLists']
+    );
+    expect(req).toEqual(reslocal);
+  });
+
+  it('transformDriverStanding() should return null if empty respone from server ', () => {
+    const responData = {};
+    const res: TDriverStanding = {
+      driver: '',
+      driverId: '',
+    };
+
+    const req = serviceTest.transformDriverStanding(responData);
+    expect(req).toEqual(res);
+  });
+
   it('getSeasonResult() should call valid URL with season', () => {
     const season = '2013';
-    const driverStanding: TDriverStanding = {
+    const driverStandinglocal: TDriverStanding = {
       driver: 'test',
       driverId: 'test',
     };
-    serviceTest.getSeasonResult(season, driverStanding).subscribe();
+    serviceTest.getSeasonResult(season, driverStandinglocal).subscribe();
     const reqMock = httpMock.expectOne(
       (req) =>
         req.method === 'GET' && req.url === baseUrl + season + seasonResult
@@ -157,12 +180,18 @@ describe('MotorRacingService', () => {
     reqMock.flush(dummySeasonResult);
   });
 
+  it('getSeasonResult() should return null if empty respone from server ', () => {
+    const responData = {};
+    const res: TDriverStanding = {
+      driver: '',
+      driverId: '',
+    };
+
+    const req = serviceTest.transformDriverStanding(responData);
+    expect(req).toEqual(res);
+  });
   it('getSeasonResult() should call handleError()', () => {
     const season = '2013';
-    const driverStanding: TDriverStanding = {
-      driver: 'test',
-      driverId: 'test',
-    };
     spyOn(serviceTest as any, 'handleError').and.callThrough();
     const errorData: HttpErrorResponse = new HttpErrorResponse({
       error: {},

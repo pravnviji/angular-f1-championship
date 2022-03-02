@@ -38,15 +38,15 @@ export class MotorRacingService {
   transformDriverStanding(result: any) {
     console.log('***** transformDriverStanding *******');
     let driverStanding!: TDriverStanding;
-    console.log(result[0]?.DriverStandings[0]?.Driver);
     driverStanding = {
-      driverId: result[0]?.DriverStandings[0]?.Driver?.driverId,
-      driver:
-        result[0]?.DriverStandings[0]?.Driver?.givenName +
-        ' ' +
-        result[0]?.DriverStandings[0]?.Driver?.familyName,
+      driverId: result[0]?.DriverStandings[0]?.Driver?.driverId ?? '',
+      driver: result[0]?.DriverStandings[0]?.Driver
+        ? result[0]?.DriverStandings[0]?.Driver?.givenName +
+          ' ' +
+          result[0]?.DriverStandings[0]?.Driver?.familyName
+        : '',
     };
-    console.log('finalResult');
+    console.log('driverStanding');
     console.log(driverStanding);
     return driverStanding;
   }
@@ -57,18 +57,20 @@ export class MotorRacingService {
     let seasonResult: TRaceResult[] = [];
     result.forEach((items: any) => {
       seasonResult.push({
-        round: items.round,
-        driver:
-          items?.Results[0]?.Driver?.givenName +
-          ' ' +
-          items?.Results[0]?.Driver?.familyName,
-        raceName: items?.raceName,
-        date: items?.date,
-        circuitLocation:
-          items?.Circuit?.Location?.locality +
-          ', ' +
-          items.Circuit.Location.country,
-        driverId: items?.Results[0]?.Driver?.driverId,
+        round: items?.round ?? '',
+        driver: items?.Results[0]
+          ? items?.Results[0]?.Driver?.givenName +
+            ' ' +
+            items?.Results[0]?.Driver?.familyName
+          : '',
+        raceName: items?.raceName ?? '',
+        date: items?.date ?? '',
+        circuitLocation: items?.Circuit
+          ? items?.Circuit?.Location?.locality +
+            ', ' +
+            items.Circuit.Location.country
+          : '',
+        driverId: items?.Results[0]?.Driver?.driverId ?? '',
         championShipIndicator:
           items?.Results[0]?.Driver?.driverId === driverInfo.driverId
             ? 'Y'
